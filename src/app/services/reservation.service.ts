@@ -27,5 +27,11 @@ export class ReservationService {
     // normalement on envoi le clientId en URl pour avoir les reservations du client connecter 
     return this.http.get<Reservation[]>(`${this.apiUrl}/reservations.json`);
   }
+  deleteReservation(reservationId: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/reservations.json`);
+  }
+  modifyReservation(reservation: Reservation): Observable<Reservation> {
+    return this.http.put<Reservation>(`${this.apiUrl}/reservations.json`, reservation);
+  }
 
 }

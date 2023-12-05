@@ -1,1 +1,23 @@
 <h3>liste des reservations</h3>
+<table>
+    <thead>
+        <tr>
+            <th>client</th>
+            <th>bus</th>
+            <th>date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let reservation of reservations">
+            <td><div>{{ reservation.clientId }}</div></td>
+            <td><div *ngIf="!reservation['edit']; else inputBus">{{ reservation.busId }}</div><ng-template #inputBus><input type="text" id="bus" [formControl]="busModification" required></ng-template></td>
+            <td><div *ngIf="!reservation['edit']; else inputDate">{{ reservation.travelDate }}</div><ng-template #inputDate><input type="date" id="date" [formControl]="dateModification" required></ng-template></td>
+            <td>
+                <button *ngIf="!reservation['edit']; else applyContent" (click)="modifyReservation(reservation)">Modify</button>
+                <ng-template #applyContent><button (click)="apply(reservation)">Apply</button></ng-template>
+                <button (click)="deleteReservation(reservation.reservationId)">Delete</button>
+            </td>
+        </tr>
+    </tbody>
+</table>

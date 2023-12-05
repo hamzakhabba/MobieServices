@@ -1,0 +1,19 @@
+<h3>Payments</h3>
+<p>Une remise de 5% est appliquée quand le paiement est effectué par Paypal.</p>
+<div class="payment-block">
+    <button (click)="onPaypal()">Paypal</button>
+    <button (click)="onCreditCard()">carte crédit</button>
+</div>
+<div class="payment-input">
+    <div *ngIf="showPaypalContent" class="paypal">
+        <label for="email">email:</label>
+        <input type="text" id="email" [formControl]="email" required>
+    </div>
+    <div *ngIf="showCreditCardContent" class="creditCard">
+        <label for="nCard">Numero de la carte:</label>
+        <input type="text" id="nCard" [formControl]="nCard" required>
+        <label for="expiredDate">Date expiration</label>
+        <input type="date" id="expiredDate" [formControl]="expiredDate" required>
+    </div>
+
+</div>

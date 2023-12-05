@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Reservation } from '../models/reservation.model';
 import { BehaviorSubject, Observable, Subject, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReservationService {
    reservationObs$: Subject<Reservation> = new Subject() 
-  // private apiUrl = 'assets/data/reservations.json';
+   apiUrl = 'assets/data';
 
   getReservationObs(): Observable<Reservation>{
     return this.reservationObs$.asObservable();
@@ -17,10 +18,14 @@ export class ReservationService {
     this.reservationObs$.next(reservation)
   }
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   addReservation(reservation: Reservation): Observable<Reservation> {
-    return of(reservation);
+    return this.http.post<Reservation>(`${this.apiUrl}/reservations.json`,reservation);
+  }
+  getAllClientReservations(clientId: number): Observable<Reservation[]> {
+    // normalement on envoi le clientId en URl pour avoir les reservations du client connecter 
+    return this.http.get<Reservation[]>(`${this.apiUrl}/reservations.json`);
   }
 
 }

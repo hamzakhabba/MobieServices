@@ -1,32 +1,33 @@
-import { TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import { ReactiveFormsModule, FormBuilder } from '@angular/forms';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-import { ReservationFormComponent } from './components/reservation-form/reservation-form.component';
+import { ClientService } from './services/client.service';
 
 describe('AppComponent', () => {
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule
-      ],
-      declarations: [
-        AppComponent,
-        ReservationFormComponent
-      ],
-      providers: [FormBuilder],
-    }).compileComponents();
+  let component: AppComponent;
+  let fixture: ComponentFixture<AppComponent>;
+  let clientService: ClientService;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      declarations: [AppComponent],
+      providers: [{ provide: ClientService, useValue: clientService }],
+    });
+
+    fixture = TestBed.createComponent(AppComponent);
+    TestBed.inject(ClientService)
+    component = fixture.componentInstance;
   });
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
+  it('should create the component', () => {
+    expect(component).toBeTruthy();
   });
 
-  it(`should have as title 'MobiServices'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('MobiServices');
+  it('should call setReservationObs method of ClientService on ngOnInit', () => {
+    component.ngOnInit();
+    expect(clientService.setReservationObs).toHaveBeenCalledWith({
+      id: 201,
+      name: 'Hamza',
+      email: 'hamza@example.com',
+    });
   });
 });

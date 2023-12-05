@@ -35,7 +35,7 @@ describe('ReservationFormComponent', () => {
   });
 
   it('should submit the form if valid', async () => {
-    const reservationMock = { clientId: 1, travelDate: new Date('2023-12-28'), busId: 1  };
+    const reservationMock = { reservationId:1, clientId: 1, travelDate: new Date('2023-12-28'), busId: 1  };
     component.reservationForm.patchValue(reservationMock);
     const addReservationSpy = jest.spyOn(reservationService, 'addReservation').mockReturnValue(of(reservationMock));
     component.onSubmit();

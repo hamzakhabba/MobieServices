@@ -1,0 +1,19 @@
+[
+    {
+        "reservationId": 1,
+        "paymentType": "Credit Card"
+    },
+    {
+        "reservationId": 2,
+        "paymentType": "Paypal"
+    },
+    {
+        "reservationId": 3,
+        "paymentType": "Credit Card"
+    },
+    {
+        "reservationId": 4,
+        "paymentType": "Paypal"
+    }
+
+]

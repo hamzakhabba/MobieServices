@@ -1,11 +1,13 @@
 <h3>Payments</h3>
 <p>Une remise de 5% est appliquée quand le paiement est effectué par Paypal.</p>
+<div>Total : {{totalPrice | async}}</div>
 <div class="payment-block">
     <button (click)="onPaypal()">Paypal</button>
     <button (click)="onCreditCard()">carte crédit</button>
 </div>
 <div class="payment-input">
     <div *ngIf="showPaypalContent" class="paypal">
+        <p>total price après réduction : {{discountedPrice}}</p>
         <label for="email">email:</label>
         <input type="text" id="email" [formControl]="email" required>
     </div>
@@ -15,5 +17,7 @@
         <label for="expiredDate">Date expiration</label>
         <input type="date" id="expiredDate" [formControl]="expiredDate" required>
     </div>
-
+</div>
+<div class="link-block">
+    <a class="link" routerLink="/">retour</a>
 </div>

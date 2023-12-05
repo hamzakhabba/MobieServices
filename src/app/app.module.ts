@@ -8,13 +8,15 @@ import { ReservationsListComponent } from './components/reservations-list/reserv
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { PaymentComponent } from './components/payment/payment.component';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ReservationFormComponent,
     ReservationsListComponent,
-    PaymentComponent
+    PaymentComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

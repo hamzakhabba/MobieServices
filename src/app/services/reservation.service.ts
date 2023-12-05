@@ -8,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ReservationService {
    reservationObs$: Subject<Reservation> = new Subject() 
+   reservationList$: BehaviorSubject<Reservation[]> = new BehaviorSubject<Reservation[]>([]) 
    apiUrl = 'assets/data';
 
   getReservationObs(): Observable<Reservation>{
@@ -16,6 +17,14 @@ export class ReservationService {
 
   setReservationObs(reservation: Reservation){
     this.reservationObs$.next(reservation)
+  }
+
+  getReservationsList(): Observable<Reservation[]>{
+    return this.reservationList$.asObservable();
+  }
+
+  setReservationsList(reservations: Reservation[]){
+    this.reservationList$.next(reservations)
   }
 
   constructor(private http: HttpClient) { }

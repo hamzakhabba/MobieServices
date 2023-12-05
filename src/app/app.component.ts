@@ -6,7 +6,6 @@ import { ClientService } from './services/client.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'MobiServices';
 
   constructor(private clientService: ClientService ) {
 

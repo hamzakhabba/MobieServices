@@ -20,16 +20,19 @@ export class ReservationsListComponent implements OnInit {
 
   ngOnInit(): void {
     this.subscription.add(this.reservationService.getReservationObs()
-    .subscribe(reservation => {
-      this.reservations.push(reservation)
-    }))
+      .subscribe(reservation => {
+        this.reservations.push(reservation)
+        this.reservationService.setReservationsList(this.reservations)
+      }))
     this.subscription.add(this.reservationService.getAllClientReservations(this.CLIENT_ID)
       .subscribe((reservations)=>{
         this.reservations = reservations
+        this.reservationService.setReservationsList(this.reservations)
       },
       (error) => {
         console.error('Error getting reservations:', error);
       }))
+     
   }
   modifyReservation(selectedReservation: Reservation): void {
     this.reservations.forEach(item => item['edit'] = (selectedReservation === item))

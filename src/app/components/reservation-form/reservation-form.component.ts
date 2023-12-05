@@ -22,14 +22,15 @@ export class ReservationFormComponent implements OnInit {
 
   initForm(): void {
     this.reservationForm = this.fb.group({
-      date: ['', [Validators.required]],
-      bus: ['', [Validators.required]],
+      travelDate: ['', [Validators.required]],
+      busId: ['', [Validators.required]],
     });
   }
 
   onSubmit(): void {
     if(this.reservationForm.valid){
       const reservation: Reservation = this.reservationForm.value;
+      console.log(reservation)
       this.reservationService.addReservation(reservation);
       this.reservationService.setReservationObs(reservation);
       this.reservationForm.reset();

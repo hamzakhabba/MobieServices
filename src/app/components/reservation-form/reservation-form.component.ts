@@ -29,8 +29,12 @@ export class ReservationFormComponent implements OnInit {
 
   onSubmit(): void {
     if(this.reservationForm.valid){
-      const reservation: Reservation = this.reservationForm.value;
-      console.log(reservation)
+      const reservation: Reservation = {
+        travelDate: this.reservationForm.controls['travelDate'].value,
+        busId: parseInt(this.reservationForm.controls['busId'].value ?? '', 10),
+        reservationId: 1,
+        clientId: 1
+      };
       this.reservationService.addReservation(reservation);
       this.reservationService.setReservationObs(reservation);
       this.reservationForm.reset();

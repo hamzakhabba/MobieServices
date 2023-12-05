@@ -1,0 +1,20 @@
+[
+  {
+    "reservationId": 1,
+    "travelDate": "2023-12-01",
+    "busId": 101,
+    "clientId": 201
+  },
+  {
+    "reservationId": 2,
+    "travelDate": "2023-12-05",
+    "busId": 102,
+    "clientId": 201
+  },
+  {
+    "reservationId": 3,
+    "travelDate": "2023-12-10",
+    "busId": 103,
+    "clientId": 201
+  }
+]

@@ -1,5 +1,5 @@
 export interface Bus {
-    id: string;
+    numero: number;
     dailyRoute: string;
     routeSeats: number;
     departureTime: string;

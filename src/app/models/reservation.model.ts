@@ -1,5 +1,8 @@
 export interface Reservation {
+    reservationId: number,
     travelDate: Date;
-    busId: string;
+    busId: number;
     clientId: number;
+    [key: string]: any
 }
+

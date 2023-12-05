@@ -6,7 +6,9 @@ describe('BillService', () => {
   let service: BillService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      providers: [BillService],
+    });
     service = TestBed.inject(BillService);
   });
 

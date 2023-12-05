@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Reservation } from 'src/app/models/reservation.model';
-import { ReservationService } from 'src/app/services/reservation.service';
+import { Reservation } from '../../models/reservation.model';
+import { ReservationService } from '../../services/reservation.service';
 
 @Component({
   selector: 'app-reservation-form',
@@ -22,7 +22,6 @@ export class ReservationFormComponent implements OnInit {
 
   initForm(): void {
     this.reservationForm = this.fb.group({
-      client: ['', [Validators.required]],
       date: ['', [Validators.required]],
       bus: ['', [Validators.required]],
     });
@@ -32,6 +31,7 @@ export class ReservationFormComponent implements OnInit {
     if(this.reservationForm.valid){
       const reservation: Reservation = this.reservationForm.value;
       this.reservationService.addReservation(reservation);
+      this.reservationService.setReservationObs(reservation);
       this.reservationForm.reset();
     }
   }

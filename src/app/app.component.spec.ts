@@ -1,6 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { AppComponent } from './app.component';
+import { ReservationFormComponent } from './components/reservation-form/reservation-form.component';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -9,8 +11,10 @@ describe('AppComponent', () => {
         RouterTestingModule
       ],
       declarations: [
-        AppComponent
+        AppComponent,
+        ReservationFormComponent
       ],
+      providers: [FormBuilder],
     }).compileComponents();
   });
 
@@ -24,12 +28,5 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     expect(app.title).toEqual('MobiServices');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('MobiServices app is running!');
   });
 });

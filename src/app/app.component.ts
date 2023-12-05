@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ClientService } from './services/client.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -6,4 +7,15 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'MobiServices';
+
+  constructor(private clientService: ClientService ) {
+
+  }
+  ngOnInit(){
+    this.clientService.setReservationObs({
+      id: 201,
+      name: 'Hamza',
+      email: 'hamza@example.com'
+    })
+  }
 }

@@ -7,12 +7,14 @@ import { ReservationFormComponent } from './components/reservation-form/reservat
 import { ReservationsListComponent } from './components/reservations-list/reservations-list.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { PaymentComponent } from './components/payment/payment.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ReservationFormComponent,
-    ReservationsListComponent
+    ReservationsListComponent,
+    PaymentComponent
   ],
   imports: [
     BrowserModule,

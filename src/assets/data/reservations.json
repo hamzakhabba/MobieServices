@@ -1,8 +1,20 @@
 [
-    {"id": 1, "client": "Client A", "date": "2023-01-01", "bus": "Bus 1"},
-    {"id": 2, "client": "Client B", "date": "2023-01-03", "bus": "Bus 2"},
-    {"id": 3, "client": "Client C", "date": "2023-03-02", "bus": "Bus 3"},
-    {"id": 4, "client": "Client D", "date": "2023-04-10", "bus": "Bus 4"},
-    {"id": 5, "client": "Client E", "date": "2023-01-115", "bus": "Bus 5"}
-    
-  ]
+  {
+    "reservationId": 1,
+    "travelDate": "2023-12-01",
+    "busId": 101,
+    "clientId": 201
+  },
+  {
+    "reservationId": 2,
+    "travelDate": "2023-12-05",
+    "busId": 102,
+    "clientId": 201
+  },
+  {
+    "reservationId": 3,
+    "travelDate": "2023-12-10",
+    "busId": 103,
+    "clientId": 201
+  }
+]

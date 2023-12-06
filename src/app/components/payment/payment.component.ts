@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { Observable, Subscription, of, switchMap } from 'rxjs';
-import { Bus } from 'src/app/models/bus.model';
-import { Reservation } from 'src/app/models/reservation.model';
-import { BusService } from 'src/app/services/bus.service';
-import { ReservationService } from 'src/app/services/reservation.service';
+import { Observable, of, switchMap } from 'rxjs';
+import { Bus } from '../../models/bus.model';
+import { Reservation } from '../../models/reservation.model';
+import { BusService } from '../../services/bus.service';
+import { ReservationService } from '../../services/reservation.service';
 
 @Component({
   selector: 'app-payment',

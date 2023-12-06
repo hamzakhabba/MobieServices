@@ -1,9 +1,9 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
-import { takeUntil } from 'rxjs/operators';
+import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { ReservationsListComponent } from './reservations-list.component';
-import { of, Subject } from 'rxjs';
-import { ReservationService } from 'src/app/services/reservation.service';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { of } from 'rxjs';
+import { ReservationService } from '../../services/reservation.service';
+import { Reservation } from 'src/app/models/reservation.model';
 
 describe('ReservationsListComponent', () => {
   let component: ReservationsListComponent;
@@ -12,6 +12,7 @@ describe('ReservationsListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
       declarations: [ ReservationsListComponent ],
       providers: [ReservationService],
     })
@@ -27,24 +28,22 @@ describe('ReservationsListComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should get reservations on ngOnInit', () => {
-    const mockReservations = { reservationId:1, clientId: 1, travelDate: new Date('2023-12-28'), busId: 1  };
-    const getReservationsSpy = jest.spyOn(reservationService, 'getReservationObs').mockReturnValue(of(mockReservations));
-
-    fixture.detectChanges();
-
-    expect(getReservationsSpy).toHaveBeenCalled();
-    expect(component.reservations).toEqual(mockReservations);
-  });
-  it('should fetch client reservations on ngOnInit', () => {
-    const mockClientReservations = { reservationId: 1, clientId: 1, travelDate: new Date('2023-12-28'), busId: 1 };
-    const getAllClientReservationsSpy = jest.spyOn(reservationService, 'getReservationObs').mockReturnValue(of(mockClientReservations));
-
+  it('should call getReservationObs and setReservationsList on initialization', fakeAsync(() => {
+   
+    const getReservationObsSpy = jest.spyOn(reservationService, 'getReservationObs')
     component.ngOnInit();
+    tick();
+    expect(getReservationObsSpy).toHaveBeenCalled();
+  }));
+  it('should fetch client reservations on ngOnInit', fakeAsync(() => {
 
-    expect(reservationService.getAllClientReservations).toHaveBeenCalledWith(component.CLIENT_ID);
+    const mockClientReservations = [{ reservationId: 1, clientId: component.CLIENT_ID, travelDate: new Date('2023-12-28'), busId: 1 }];
+    const getAllClientReservationsSpy = jest.spyOn(reservationService, 'getAllClientReservations').mockReturnValue(of(mockClientReservations));
+    component.ngOnInit();
+    tick();
+    expect(getAllClientReservationsSpy).toHaveBeenCalled();
     expect(component.reservations).toEqual(mockClientReservations);
-  });
+  }));
 
   it('should modify reservation', () => {
     const mockReservation: any = { reservationId: 1};
@@ -69,7 +68,7 @@ describe('ReservationsListComponent', () => {
   });
 
   it('should delete reservation', () => {
-    const mockReservation: any = { reservationId: 1, /* other properties */ };
+    const mockReservation: any = { reservationId: 1};
     component.reservations = [mockReservation];
 
     component.deleteReservation(mockReservation.reservationId);
@@ -78,12 +77,8 @@ describe('ReservationsListComponent', () => {
   });
 
   it('should unsubscribe on ngOnDestroy', () => {
-    jest.spyOn(component.unsubscribe$, 'next');
-    jest.spyOn(component.unsubscribe$, 'complete');
-
+    const unsubscribeSpy = jest.spyOn(component.subscription, 'unsubscribe');
     component.ngOnDestroy();
-
-    expect(component.unsubscribe$.next).toHaveBeenCalledWith(true);
-    expect(component.unsubscribe$.complete).toHaveBeenCalled();
+    expect(unsubscribeSpy).toHaveBeenCalled();
   });
 });

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Subject, Subscription, takeUntil } from 'rxjs';
-import { Reservation } from 'src/app/models/reservation.model';
-import { ReservationService } from 'src/app/services/reservation.service';
+import { Reservation } from '../../models/reservation.model';
+import { ReservationService } from '../../services/reservation.service';
 import { FormControl, Validators } from '@angular/forms';
 @Component({
   selector: 'app-reservations-list',

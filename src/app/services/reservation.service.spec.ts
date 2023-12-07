@@ -1,5 +1,8 @@
 import { TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import {
+  HttpClientTestingModule,
+  HttpTestingController,
+} from '@angular/common/http/testing';
 import { ReservationService } from './reservation.service';
 import { Reservation } from '../models/reservation.model';
 
@@ -29,7 +32,7 @@ describe('ReservationService', () => {
       reservationId: 1,
       travelDate: new Date('27-12-2023'),
       busId: 0,
-      clientId: 0
+      clientId: 0,
     };
 
     service.setReservationObs(mockReservation);
@@ -43,32 +46,38 @@ describe('ReservationService', () => {
       reservationId: 1,
       travelDate: new Date('27-12-2023'),
       busId: 0,
-      clientId: 0
+      clientId: 0,
     };
 
     service.addReservation(mockReservation).subscribe((reservation) => {
       expect(reservation).toEqual(mockReservation);
     });
 
-    const req = httpTestingController.expectOne(`${service.apiUrl}/reservations.json`);
+    const req = httpTestingController.expectOne(
+      `${service.apiUrl}/reservations.json`
+    );
     expect(req.request.method).toEqual('POST');
     req.flush(mockReservation);
   });
 
   it('should get all client reservations', () => {
     const clientId = 123;
-    const mockReservations: Reservation[] = [{
-      reservationId: 1,
-      travelDate: new Date('27-12-2023'),
-      busId: 0,
-      clientId: 0
-    }];
+    const mockReservations: Reservation[] = [
+      {
+        reservationId: 1,
+        travelDate: new Date('27-12-2023'),
+        busId: 0,
+        clientId: 0,
+      },
+    ];
 
     service.getAllClientReservations(clientId).subscribe((reservations) => {
       expect(reservations).toEqual(mockReservations);
     });
 
-    const req = httpTestingController.expectOne(`${service.apiUrl}/reservations.json`);
+    const req = httpTestingController.expectOne(
+      `${service.apiUrl}/reservations.json`
+    );
     expect(req.request.method).toEqual('GET');
     req.flush(mockReservations);
   });

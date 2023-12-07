@@ -4,43 +4,50 @@ import { BehaviorSubject, Observable, Subject, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ReservationService {
-   reservationObs$: Subject<Reservation> = new Subject() 
-   reservationList$: BehaviorSubject<Reservation[]> = new BehaviorSubject<Reservation[]>([]) 
-   apiUrl = 'assets/data';
+  reservationObs$: Subject<Reservation> = new Subject();
+  reservationList$: BehaviorSubject<Reservation[]> = new BehaviorSubject<
+    Reservation[]
+  >([]);
+  apiUrl = 'assets/data';
 
-  getReservationObs(): Observable<Reservation>{
+  getReservationObs(): Observable<Reservation> {
     return this.reservationObs$.asObservable();
   }
 
-  setReservationObs(reservation: Reservation){
-    this.reservationObs$.next(reservation)
+  setReservationObs(reservation: Reservation) {
+    this.reservationObs$.next(reservation);
   }
 
-  getReservationsList(): Observable<Reservation[]>{
+  getReservationsList(): Observable<Reservation[]> {
     return this.reservationList$.asObservable();
   }
 
-  setReservationsList(reservations: Reservation[]){
-    this.reservationList$.next(reservations)
+  setReservationsList(reservations: Reservation[]) {
+    this.reservationList$.next(reservations);
   }
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   addReservation(reservation: Reservation): Observable<Reservation> {
-    return this.http.post<Reservation>(`${this.apiUrl}/reservations.json`,reservation);
+    return this.http.post<Reservation>(
+      `${this.apiUrl}/reservations.json`,
+      reservation
+    );
   }
   getAllClientReservations(clientId: number): Observable<Reservation[]> {
-    // normalement on envoi le clientId en URl pour avoir les reservations du client connecter 
+    // normalement on envoi le clientId en URl pour avoir les reservations du client connecter
     return this.http.get<Reservation[]>(`${this.apiUrl}/reservations.json`);
   }
   deleteReservation(reservationId: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/reservations.json`);
   }
   modifyReservation(reservation: Reservation): Observable<Reservation> {
-    return this.http.put<Reservation>(`${this.apiUrl}/reservations.json`, reservation);
+    return this.http.put<Reservation>(
+      `${this.apiUrl}/reservations.json`,
+      reservation
+    );
   }
-
 }

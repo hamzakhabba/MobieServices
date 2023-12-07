@@ -1,13 +1,14 @@
 <div class="container">
-    <h3>Ajouter une reservation</h3>
-    <form [formGroup]="reservationForm" (ngSubmit)="onSubmit()">
-        <label for="date">Date:</label>
-        <input type="date" id="date" formControlName="travelDate" required>
-    
-        <label for="bus">Bus:</label>
-        <input type="text" id="bus" formControlName="busId" required>
+  <h3>Ajouter une reservation</h3>
+  <form [formGroup]="reservationForm" (ngSubmit)="onSubmit()">
+    <label for="date">Date:</label>
+    <input type="date" id="date" formControlName="travelDate" required />
 
-        <button class="btn" type="submit" [disabled]="!reservationForm.valid">Submit</button>
-    </form>
+    <label for="bus">Bus:</label>
+    <input type="text" id="bus" formControlName="busId" required />
+
+    <button class="btn" type="submit" [disabled]="!reservationForm.valid">
+      Submit
+    </button>
+  </form>
 </div>
-

@@ -4,12 +4,12 @@ import { PaymentComponent } from './components/payment/payment.component';
 import { HomeComponent } from './components/home/home.component';
 
 const routes: Routes = [
-  {path: '', component: HomeComponent},
-  {path: 'payment', component: PaymentComponent}
+  { path: '', component: HomeComponent },
+  { path: 'payment', component: PaymentComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

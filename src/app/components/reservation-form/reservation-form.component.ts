@@ -6,15 +6,15 @@ import { ReservationService } from '../../services/reservation.service';
 @Component({
   selector: 'app-reservation-form',
   templateUrl: './reservation-form.component.html',
-  styleUrls: ['./reservation-form.component.scss']
+  styleUrls: ['./reservation-form.component.scss'],
 })
 export class ReservationFormComponent implements OnInit {
   reservationForm: FormGroup = this.fb.group({});
 
   constructor(
-      private fb: FormBuilder, 
-      private reservationService: ReservationService 
-    ) {}
+    private fb: FormBuilder,
+    private reservationService: ReservationService
+  ) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -29,17 +29,16 @@ export class ReservationFormComponent implements OnInit {
 
   onSubmit(): void {
     console.log('Form Value:', this.reservationForm.value);
-    if(this.reservationForm.valid){
+    if (this.reservationForm.valid) {
       const reservation: Reservation = {
         travelDate: this.reservationForm.controls['travelDate'].value,
         busId: parseInt(this.reservationForm.controls['busId'].value ?? '', 10),
         reservationId: 1,
-        clientId: 1
+        clientId: 1,
       };
       this.reservationService.addReservation(reservation);
       this.reservationService.setReservationObs(reservation);
       this.reservationForm.reset();
     }
   }
-
 }

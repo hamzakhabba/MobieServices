@@ -9,48 +9,55 @@ import { ReservationService } from '../../services/reservation.service';
 @Component({
   selector: 'app-payment',
   templateUrl: './payment.component.html',
-  styleUrls: ['./payment.component.scss']
+  styleUrls: ['./payment.component.scss'],
 })
 export class PaymentComponent implements OnInit {
-  showPaypalContent = false
-  showCreditCardContent = false
-  totalPrice: Observable<number> | undefined
-  totalNormalPrice = 0
-  discountedPrice = 0
-  buses: Bus[] = []
-  filtredbuses: Bus[] = []
-  email = new FormControl('', Validators.required)
-  nCard = new FormControl('', Validators.required)
-  expiredDate = new FormControl('', Validators.required)
-  constructor(private reservationService: ReservationService, private busService: BusService) { }
+  showPaypalContent = false;
+  showCreditCardContent = false;
+  totalPrice: Observable<number> | undefined;
+  totalNormalPrice = 0;
+  discountedPrice = 0;
+  buses: Bus[] = [];
+  filtredbuses: Bus[] = [];
+  email = new FormControl('', Validators.required);
+  nCard = new FormControl('', Validators.required);
+  expiredDate = new FormControl('', Validators.required);
+  constructor(
+    private reservationService: ReservationService,
+    private busService: BusService
+  ) {}
 
   ngOnInit(): void {
-   
-  this.totalPrice = this.reservationService.getReservationsList()
-    .pipe(
-      switchMap((reservations: Reservation[])=>{
+    this.totalPrice = this.reservationService.getReservationsList().pipe(
+      switchMap((reservations: Reservation[]) => {
         return this.busService.getBuses().pipe(
-          switchMap((buses: Bus[])=>{
-            this.totalNormalPrice = this.calculateTotalPrice(reservations,buses);
+          switchMap((buses: Bus[]) => {
+            this.totalNormalPrice = this.calculateTotalPrice(
+              reservations,
+              buses
+            );
             return of(this.totalNormalPrice);
           })
-        )
+        );
       })
-    )
+    );
   }
 
-  onPaypal(): void{
-    this.showPaypalContent = true
-    this.showCreditCardContent = false
+  onPaypal(): void {
+    this.showPaypalContent = true;
+    this.showCreditCardContent = false;
     this.discountedPrice = this.applyDiscount(this.totalNormalPrice);
   }
-  
+
   onCreditCard(): void {
-    this.showCreditCardContent = true
-    this.showPaypalContent = false
+    this.showCreditCardContent = true;
+    this.showPaypalContent = false;
   }
 
-  private calculateTotalPrice(reservations: Reservation[], buses: Bus[]): number {
+  private calculateTotalPrice(
+    reservations: Reservation[],
+    buses: Bus[]
+  ): number {
     return reservations.reduce((total, reservation) => {
       const bus = buses.find((b) => b.numero === reservation.busId);
       return total + (bus ? bus.routePrice : 0);
@@ -58,7 +65,6 @@ export class PaymentComponent implements OnInit {
   }
 
   private applyDiscount(totalPrice: number): number {
-    return (totalPrice - totalPrice * 0.05);
+    return totalPrice - totalPrice * 0.05;
   }
-
 }

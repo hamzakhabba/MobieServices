@@ -1,11 +1,11 @@
-.payment-block{
+.payment-block {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.payment-input {
+  .creditCard {
     display: flex;
     gap: 10px;
-    margin-bottom: 20px;
-}
-.payment-input{
-    .creditCard{
-        display: flex;
-        gap: 10px;
-    }
+  }
 }

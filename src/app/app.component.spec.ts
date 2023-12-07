@@ -14,7 +14,7 @@ describe('AppComponent', () => {
     });
 
     fixture = TestBed.createComponent(AppComponent);
-    clientService = TestBed.inject(ClientService)
+    clientService = TestBed.inject(ClientService);
     component = fixture.componentInstance;
   });
 
@@ -23,7 +23,7 @@ describe('AppComponent', () => {
   });
 
   it('should call setReservationObs method of ClientService on ngOnInit', () => {
-    const setReservationObsSpy = jest.spyOn(clientService, 'setReservationObs')
+    const setReservationObsSpy = jest.spyOn(clientService, 'setReservationObs');
     component.ngOnInit();
     expect(setReservationObsSpy).toHaveBeenCalledWith({
       id: 201,

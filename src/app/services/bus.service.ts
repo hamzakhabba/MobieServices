@@ -5,11 +5,11 @@ import { Bus } from '../models/bus.model';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class BusService {
   apiUrl = 'assets/data';
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getBuses(): Observable<Bus[]> {
     return this.http.get<Bus[]>(`${this.apiUrl}/buses.json`);
